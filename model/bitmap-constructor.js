@@ -10,15 +10,16 @@ const bitObj = {};
 function BitConstructor(data){
   this.type = data.toString('utf-8', 0, 2);
   this.size = data.readInt32LE(2);
+  this.headerSize = data.readInt32LE(14);
+  this.bitsPerPixel = data.readInt32LE(28);
   this.width = data.readInt32LE(18);
   this.height = data.readInt32LE(22);
-  this.x = data.readInt32LE(38);
-  this.y = data.readInt32LE(42);
-  this.maxColorNum = data.readInt32LE(46);
-  this.hS = data.readInt32LE(14);
-  this.pixW = data.readInt32LE(18);
-  this.pixH = data.readInt32LE(20);
-  this.BpP = data.readInt32LE(24);
+  // this.maxColorNum = data.readInt32LE(46);
+  this.colorTableStart = this.headerSize + 14;
+
+  this.rowWidth = Math.ceil(((this.bitsPerPixel * this.width + 31)/32) * 4);
+
+  this.buffer = data.toString('hex', 1078, this.size);
 }
 
 fileHelper(`${__dirname}/../assets/palette-bitmap.bmp`, (err, data) => {
