@@ -1,10 +1,10 @@
 'use strict';
 
 const fileReader = require(`${__dirname}/../lib/bitmap-file-helper.js`);
-const fs = require('fs');
-// module.exports = exports = {};
+// const fs = require('fs');
+module.exports = exports = {};
 
-const bitObj = {};
+exports.bitObj = {};
 
 function Bitmap(data) {
   this.type = data.toString('utf-8', 0, 2);
@@ -23,10 +23,12 @@ function Bitmap(data) {
   this.pixelTable = data.toString('hex', this.pixelArrayStart, this.size).match(/.{1,2}/g);
 }
 
-fileReader.initFile(`${__dirname}/../assets/palette-bitmap.bmp`, (err, data) => {
-  if (err) throw err;
-  bitObj.thingOne = new Bitmap(data);
-  console.log(bitObj);
-  fileReader.writeNew(`${__dirname}/../assets/palette-write-bitmap.bmp`, data);
-  return bitObj;
-});
+exports.changeFile = () => {
+  fileReader.initFile(`${__dirname}/../assets/palette-bitmap.bmp`, (err, data) => {
+    if (err) throw err;
+    exports.bitObj.thingOne = new Bitmap(data);
+    console.log(exports.bitObj);
+    fileReader.writeNew(`${__dirname}/../assets/palette-write-bitmap.bmp`, data);
+    return exports.bitObj;
+  });
+};
