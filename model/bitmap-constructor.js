@@ -9,6 +9,7 @@ module.exports = function Bitmap (data) {
   this.width = data.readInt32LE(18);
   this.height = data.readInt32LE(22);
   this.colorTableStart = this.headerSize + 14;
+  
   this.colorTable = data.toString('hex', this.colorTableStart, this.pixelArrayStart).match(/.{1,8}/g);
 
   this.rowWidth = Math.ceil(((this.bitsPerPixel * this.width + 31) / 32) * 4);
