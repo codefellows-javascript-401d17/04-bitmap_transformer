@@ -1,13 +1,13 @@
-module.exports = function ColorTransform (bitmap) {
+'use strict';
+
+const ColorTransform =  module.exports = function() {
 };
 
 ColorTransform.prototype.colorShift = function(bitmap) {
   let colorMap = bitmap.colorMap;
-  colorMap.map(function(pixel) {
-    console.log(pixel + 1);
-    return pixel + 1;
-  })
-
-  return colorMap;
+  return colorMap.map(function(pixel) {
+    let newPix = pixel + 1;
+    console.log(newPix.toString(16));
+    return newPix.toString(16);
+  });
 };
-

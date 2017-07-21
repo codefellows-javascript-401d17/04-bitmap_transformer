@@ -1,7 +1,4 @@
 'use strict';
-const fileReader = require(`${__dirname}/../lib/bitmap-file-helper.js`);
-
-// const fs = require('fs');
 
 module.exports = function Bitmap (data) {
   this.type = data.toString('utf-8', 0, 2);
@@ -11,7 +8,6 @@ module.exports = function Bitmap (data) {
   this.bitsPerPixel = data.readInt32LE(28);
   this.width = data.readInt32LE(18);
   this.height = data.readInt32LE(22);
-  // this.maxColorNum = data.readInt32LE(46);
   this.colorTableStart = this.headerSize + 14;
   this.colorTable = data.toString('hex', this.colorTableStart, this.pixelArrayStart).match(/.{1,8}/g);
 
