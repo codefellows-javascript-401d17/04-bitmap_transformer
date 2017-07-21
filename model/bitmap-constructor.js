@@ -1,12 +1,9 @@
 'use strict';
-
 const fileReader = require(`${__dirname}/../lib/bitmap-file-helper.js`);
+
 // const fs = require('fs');
-module.exports = exports = {};
 
-exports.bitObj = {};
-
-function Bitmap(data) {
+module.exports = function Bitmap (data) {
   this.type = data.toString('utf-8', 0, 2);
   this.size = data.readInt32LE(2);
   this.pixelArrayStart = data.readInt32LE(10);
@@ -21,14 +18,7 @@ function Bitmap(data) {
   this.rowWidth = Math.ceil(((this.bitsPerPixel * this.width + 31) / 32) * 4);
 
   this.pixelTable = data.toString('hex', this.pixelArrayStart, this.size).match(/.{1,2}/g);
-}
-
-exports.changeFile = () => {
-  fileReader.initFile(`${__dirname}/../assets/palette-bitmap.bmp`, (err, data) => {
-    if (err) throw err;
-    exports.bitObj.thingOne = new Bitmap(data);
-    console.log(exports.bitObj);
-    fileReader.writeNew(`${__dirname}/../assets/palette-write-bitmap.bmp`, data);
-    return exports.bitObj;
+  this.colorMap = this.pixelTable.map(function (pix) {
+    return parseInt(pix);
   });
 };
