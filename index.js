@@ -4,11 +4,13 @@ const fs = require('fs');
 const bitmap = fs.readFileSync(`${__dirname}/assets/palette-bitmap.bmp`);
 
 
+// fs.readFile(`${__dirname}/assets/palette-bitmap.bmp`, function(err, data) {});
 
-// const bmp = {};
+
+const bmp = {};
 
 // bmp.all = bitmap.toString('hex');
-// bmp.type = bitmap.toString('utf-8', 0, 2);
+bmp.type = bitmap.toString('hex', 0, 2);
 // bmp.size = bitmap.readInt32LE(2);
 // bmp.sizeOfHeader = bitmap.readInt32LE(14);
 // bmp.offsetToPixelArr = bitmap.readInt32LE(10);
@@ -23,4 +25,4 @@ const bitmap = fs.readFileSync(`${__dirname}/assets/palette-bitmap.bmp`);
 // bmp.STARTOFTHECOLORARRY = bitmap.readInt32LE(66);
 // bmp.actualColorArray = bitmap.toString('hex', 54, 182);
 
-// console.log('my current bitmap:', bmp);
+console.log('my current bitmap:', bmp);
