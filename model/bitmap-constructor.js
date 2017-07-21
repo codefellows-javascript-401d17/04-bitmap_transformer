@@ -1,13 +1,12 @@
 'use strict';
 
-const fileHelper = require(`${__dirname}/../lib/bitmap-file-helper.js`);
+const initFile = require(`${__dirname}/../lib/bitmap-file-helper.js`);
 const fs = require('fs');
-
 // module.exports = exports = {};
 
 const bitObj = {};
 
-function BitConstructor(data){
+function Bitmap(data) {
   this.type = data.toString('utf-8', 0, 2);
   this.size = data.readInt32LE(2);
   this.pixelArrayStart = data.readInt32LE(10);
@@ -17,16 +16,18 @@ function BitConstructor(data){
   this.height = data.readInt32LE(22);
   // this.maxColorNum = data.readInt32LE(46);
   this.colorTableStart = this.headerSize + 14;
-  this.colorTable = data.toString('hex', this.colorTableStart, this.pixelArrayStart);
+  this.colorTable = data.toString('hex', this.colorTableStart, this.pixelArrayStart).match(/.{1,8}/g);
 
-  this.rowWidth = Math.ceil(((this.bitsPerPixel * this.width + 31)/32) * 4);
+  this.rowWidth = Math.ceil(((this.bitsPerPixel * this.width + 31) / 32) * 4);
 
-  this.buffer = data.toString('hex', 1078, this.size);
+  this.pixelTable = data.toString('hex', this.pixelArrayStart, this.size).match(/.{1,2}/g);
 }
 
-fileHelper(`${__dirname}/../assets/palette-bitmap.bmp`, (err, data) => {
-  if(err) throw err;
-  bitObj.thingOne = new BitConstructor(data);
+initFile(`${__dirname}/../assets/palette-bitmap.bmp`, (err, data) => {
+  if (err) throw err;
+  bitObj.thingOne = new Bitmap(data);
   console.log(bitObj);
-  return data;
+  
+  return bitObj;
 });
+
