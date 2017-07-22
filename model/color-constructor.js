@@ -37,5 +37,11 @@ ColorTransform.prototype.invertColors = function(bitmap) {
     return invertArray;
   });
 };
-// 
-// ColorTransform.prototype.shiftColors = function
+
+ColorTransform.prototype.rotateImage = function(bitmap) {
+
+  let pixelTable = bitmap.pixelTable;
+
+  return pixelTable.reverse();
+
+};
