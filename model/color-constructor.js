@@ -63,3 +63,10 @@ ColorTransform.prototype.blueShift = function (bitmap) {
   });
 };
 
+ColorTransform.prototype.rotateImage = function(bitmap) {
+
+  let pixelTable = bitmap.pixelTable;
+
+  return pixelTable.reverse();
+
+};
