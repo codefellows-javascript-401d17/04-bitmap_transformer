@@ -5,17 +5,18 @@ module.exports = exports = {};
 const fs = require('fs');
 
 exports.Bitmap = function(data) {
-  this.all = data.toString('hex');
+  this.all = data;
 
   this.filetype = data.toString('hex', 0, 2);
   this.offsetToPixelArrInHex = data.toString('hex', 10, 14);
   this.offsetToPixelArr = data.readInt32LE(10);
 
-  this.offsetToColorArr = this.infoHeader + 14;
+  this.offsetToColorArr = 54;
+
 
   // full file:
   this.headerAll = data.toString('hex', 0, this.offsetToColorArr);
-  this.colorArr = data.toString('hex', this.offsetToColorArr, 182);
+  this.colorArr = data.toString('hex', this.offsetToColorArr, this.offsettoPixelArr);
   this.pixelArr = data.toString('hex', this.offsetToPixelArr);
 };
 
