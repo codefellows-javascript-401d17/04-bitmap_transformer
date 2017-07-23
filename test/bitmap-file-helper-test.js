@@ -5,16 +5,24 @@ const fileReader = require(`${__dirname}/../lib/bitmap-file-helper.js`);
 
 describe('File Helper Module', function(){
   describe('Init File', () => {
-    fileReader.initFile(`${__dirname}/../assets/palette-bitmap.bmp`, (err, data) => {
-      it('Should not error', () => {
-        expect(err).to.not(err);
+    it('Should not error', (done) => {
+      fileReader.initFile(`${__dirname}/../assets/palette-bitmap.bmp`, function(err, data){
+        console.log(err);
+        expect(err).to.equal(null);
+        done();
       });
-      it('Should have data', () => {
-        expect(data).to.exist();
+    });
+    it('Should find data', (done) => {
+      fileReader.initFile(`${__dirname}/../assets/palette-bitmap.bmp`, function(err, data){
+        console.log(data);
+        expect(data).to.not.equal(null);
+        done();
       });
     });
   });
   describe('Write New', () => {
-    fileReader.writeNew(`${__dirname}/../assets/palette-write-bitmap.bmp`, `${__dirname}/../assets/palette-bitmap.bmp`);
+    it('Should ', () => {
+      fileReader.writeNew(`${__dirname}/../assets/palette-write-bitmap.bmp`, `${__dirname}/../assets/palette-bitmap.bmp`);
+    });
   });
 });
