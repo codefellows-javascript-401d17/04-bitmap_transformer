@@ -47,8 +47,8 @@ ColorTransform.prototype.blueShift = function (bitmap) {
     let r = parseInt(hexArray[0], 16);
     let g = parseInt(hexArray[1], 16);
     let b = parseInt(hexArray[2], 16);
-    let invertR = (Math.ceil(r * 0.33)).toString(16);
-    let invertG = (g).toString(16);
+    let invertR = (Math.ceil(r * 0.1)).toString(16);
+    let invertG = (Math.ceil(g * 0.1)).toString(16);
     let invertB = (b).toString(16);
 
     let colorShiftArray = [invertR, invertG, invertB, '00'];

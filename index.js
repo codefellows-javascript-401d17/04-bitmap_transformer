@@ -32,6 +32,32 @@ const invertBitmap = () => {
   fileHelper.initFile(`${__dirname}/assets/palette-bitmap.bmp`, onRead);
 };
 
+const colorShiftBitmap = () => {
+
+  let onRead = (err, data) => {
+    if (err) throw err;
+
+    let bitmap = new Bitmap(data);
+    let transform = new ColorTransform();
+    bitmap.colorTable = transform.blueShift(bitmap);
+    // bitmap.colorTable = transform.invertColors(bitmap);
+    // let copiedData = data.copy();
+    let copied = new Buffer(data);
+
+    //inserts new color table
+    let startToColorTable = copied.slice(0, bitmap.headerSize + 14);
+    console.log(bitmap.headerSize);
+    let subColorTableBuffer = new Buffer(bitmap.colorTable.join(''), 'hex');
+    let colorTableToEnd = copied.slice(data.readInt32LE(10));
+    let testcopy = Buffer.concat([startToColorTable, subColorTableBuffer, colorTableToEnd]);
+
+
+    fileHelper.writeNew(`${__dirname}/assets/palette-write-bitmap.bmp`, testcopy /*insert changed bitmap here*/, exports.writeNew);
+  };
+
+  fileHelper.initFile(`${__dirname}/assets/palette-bitmap.bmp`, onRead);
+};
+
 const rotateBitmap = () => {
   fileHelper.initFile(`${__dirname}/assets/palette-bitmap.bmp`, (err, data) => {
     if (err) throw err;
@@ -45,5 +71,6 @@ const rotateBitmap = () => {
   });
 };
 
-invertBitmap();
+colorShiftBitmap();
+// invertBitmap();
 // rotateBitmap();
