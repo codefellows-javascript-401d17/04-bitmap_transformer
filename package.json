@@ -1,0 +1,29 @@
+{
+  "name": "04-bitmap_transformer",
+  "version": "1.0.0",
+  "description": "this project changes a bitmap file into several variations",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/loganabsher/04-bitmap_transformer.git"
+  },
+  "keywords": [
+    "bitmap"
+  ],
+  "author": "Logan Absher, Luis Manzo, Nick Asmussen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/loganabsher/04-bitmap_transformer/issues"
+  },
+  "homepage": "https://github.com/loganabsher/04-bitmap_transformer#readme",
+  "devDependencies": {
+    "chai": "^4.1.0",
+    "mocha": "^3.4.2"
+  }
+}
