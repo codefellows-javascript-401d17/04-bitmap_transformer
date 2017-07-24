@@ -1,16 +1,6 @@
 'use strict';
 
-const ColorTransform = module.exports = function () {
-};
-
-// ColorTransform.prototype.colorShift = function(bitmap) {
-//   let colorMap = bitmap.colorMap;
-//   return colorMap.map(function(pixel) {
-//     let newPix = pixel + 1;
-//     console.log(newPix.toString(16));
-//     return newPix.toString(16);
-//   });
-// };
+const ColorTransform = module.exports = function () {};
 
 ColorTransform.prototype.invertColors = function (bitmap) {
   let colorTable = bitmap.colorTable;
@@ -26,14 +16,12 @@ ColorTransform.prototype.invertColors = function (bitmap) {
     let invertB = (255 - b).toString(16);
 
     let invertArray = [invertR, invertG, invertB, '00'];
-    // console.log(invertArray);
 
     invertArray.forEach(function (val, i) {
       if (val.length === 1) {
         invertArray[i] = '0' + invertArray[i];
       }
     });
-
     invertArray = invertArray.join('');
     return invertArray;
   });
@@ -57,16 +45,13 @@ ColorTransform.prototype.blueShift = function (bitmap) {
         colorShiftArray[i] = '0' + colorShiftArray[i];
       }
     });
-
     colorShiftArray = colorShiftArray.join('');
     return colorShiftArray;
   });
 };
 
 ColorTransform.prototype.rotateImage = function(bitmap) {
-
   let pixelTable = bitmap.pixelTable;
 
   return pixelTable.reverse();
-
 };
