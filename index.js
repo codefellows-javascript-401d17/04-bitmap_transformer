@@ -5,6 +5,7 @@ const bitmapConstructor = require(`${__dirname}/model/bitmap-constructor.js`);
 const greyScaleTransform = require(`${__dirname}/lib/grey-scale-transform.js`);
 const reverseTransform = require(`${__dirname}/lib/reverse-transform.js`);
 const invertTransform = require(`${__dirname}/lib/invert-transform.js`);
+const infraredTransform = require(`${__dirname}/lib/infrared-transform.js`);
 
 
 bitmapFileHelper(`${__dirname}/assets/palette-bitmap.bmp`, function(err, data) {
@@ -32,3 +33,10 @@ bitmapFileHelper(`${__dirname}/assets/palette-bitmap.bmp`, function(err, data) {
   bmp.newFile('inverted');
 });
 
+bitmapFileHelper(`${__dirname}/assets/palette-bitmap.bmp`, function(err, data) {
+  if(err) throw err;
+  let bmp = new bitmapConstructor.Bitmap(data);
+
+  bmp.colorArr = infraredTransform(bmp.colorArr);
+  bmp.newFile('infrared');
+});
