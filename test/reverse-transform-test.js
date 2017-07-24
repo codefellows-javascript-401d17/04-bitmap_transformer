@@ -3,8 +3,8 @@
 const expect = require('chai').expect;
 const reverseTransform = require(`${__dirname}/../lib/reverse-transform.js`);
 
-describe('reverse transform', function(){
-  describe('with right return', () =>{
+describe('Reverse Transform', function(){
+  describe('with valid string', () =>{
     it('should return a flip of pairs', done =>{
       let test = reverseTransform('1c002d');
       expect(test).to.be.a('string');

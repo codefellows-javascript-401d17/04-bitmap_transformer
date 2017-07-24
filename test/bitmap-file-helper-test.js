@@ -1,7 +1,7 @@
 'use strict';
 
 const expect = require('chai').expect;
-const bitmapFileHelper = require(`${__dirname}/../lib/bitmap-file-reader.js`);
+const bitmapFileHelper = require(`${__dirname}/../lib/bitmap-file-helper.js`);
 
 describe('Bitmap File Helper', function() {
   describe('with improper file path', () => {
