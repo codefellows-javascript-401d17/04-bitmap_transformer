@@ -4,7 +4,7 @@ const expect = require('chai').expect;
 const invertTransform = require(`${__dirname}/../lib/invert-transform.js`);
 
 describe('Color Invert', function(){
-  describe('with right return', () => {
+  describe('with valid string', () => {
     it('return inverse', done => {
       let test = invertTransform('00000000');
       expect(test).to.be.a('string');
