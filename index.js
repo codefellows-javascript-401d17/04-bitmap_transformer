@@ -6,7 +6,9 @@ let fileHelper = require(`${__dirname}/lib/bitmap-file-helper.js`);
 
 var transform = new ColorTransform();
 
-const invertBitmap = () => {
+module.exports = exports = {};
+
+exports.invertBitmap = () => {
 
   let onRead = (err, data) => {
     if (err) throw err;
@@ -32,7 +34,7 @@ const invertBitmap = () => {
   fileHelper.initFile(`${__dirname}/assets/palette-bitmap.bmp`, onRead);
 };
 
-const colorShiftBitmap = () => {
+exports.colorShiftBitmap = () => {
 
   let onRead = (err, data) => {
     if (err) throw err;
@@ -58,7 +60,7 @@ const colorShiftBitmap = () => {
   fileHelper.initFile(`${__dirname}/assets/palette-bitmap.bmp`, onRead);
 };
 
-const rotateBitmap = () => {
+exports.rotateBitmap = () => {
   fileHelper.initFile(`${__dirname}/assets/palette-bitmap.bmp`, (err, data) => {
     if (err) throw err;
 
@@ -71,6 +73,6 @@ const rotateBitmap = () => {
   });
 };
 
-colorShiftBitmap();
-// invertBitmap();
-// rotateBitmap();
+exports.colorShiftBitmap();
+// exports.invertBitmap();
+// exports.rotateBitmap();
