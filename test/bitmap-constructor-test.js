@@ -3,6 +3,7 @@
 const expect = require('chai').expect;
 const index = require(`${__dirname}/../index.js`);
 const fileReader = require(`${__dirname}/../lib/bitmap-file-helper.js`);
+const bitmapConstructor = require(`${__dirname}/../model/bitmap-constructor.js`);
 
 describe('Bitmap Constructor Module', () => {
   describe('#Invert Bitmap', () => {
@@ -34,6 +35,16 @@ describe('Bitmap Constructor Module', () => {
       fileReader.initFile(`${__dirname}/../assets/palette-rotate-bitmap.bmp`, (err, data) => {
         expect(err).to.equal(null);
         expect(data).to.not.equal(null);
+        done();
+      });
+    });
+  });
+  describe('#Bitmap Constructor', () => {
+    it('Should return an object', (done) => {
+      fileReader.initFile(`${__dirname}/../assets/palette-bitmap.bmp`, (err, data) => {
+        expect(err).to.equal(null);
+        let result = new bitmapConstructor(data);
+        expect(result).to.be.an('object');
         done();
       });
     });
