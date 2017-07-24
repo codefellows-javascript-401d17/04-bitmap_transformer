@@ -55,25 +55,25 @@ exports.colorShiftBitmap = () => {
   fileHelper.initFile(`${__dirname}/assets/palette-bitmap.bmp`, onRead);
 };
 
-  let onRead = (err, data) => {
 exports.rotateBitmap = () => {
-  fileHelper.initFile(`${__dirname}/assets/palette-bitmap.bmp`, (err, data) => {
-    if (err) throw err;
+  let onRead = (err, data) => {
+    fileHelper.initFile(`${__dirname}/assets/palette-bitmap.bmp`, (err, data) => {
+      if (err) throw err;
 
-    let bitmap = new Bitmap(data);
-    let transform = new ColorTransform();
-    let copied = new Buffer(data);
+      let bitmap = new Bitmap(data);
+      let transform = new ColorTransform();
+      let copied = new Buffer(data);
 
-    bitmap.pixelTable = transform.rotateImage(bitmap);
+      bitmap.pixelTable = transform.rotateImage(bitmap);
 
-    // inserts new pixel arr
-    let startPixelTable = copied.slice(0, bitmap.pixelArrayStart);
-    let pixelArrBuffer = new Buffer(bitmap.pixelTable.join(''), 'hex');
-    let testcopy = Buffer.concat([startPixelTable, pixelArrBuffer]);
+      // inserts new pixel arr
+      let startPixelTable = copied.slice(0, bitmap.pixelArrayStart);
+      let pixelArrBuffer = new Buffer(bitmap.pixelTable.join(''), 'hex');
+      let testcopy = Buffer.concat([startPixelTable, pixelArrBuffer]);
 
-    fileHelper.writeNew(`${__dirname}/assets/palette-rotate-bitmap.bmp`, testcopy /*insert changed bitmap here*/, exports.writeNew);
-  };
-
+      fileHelper.writeNew(`${__dirname}/assets/palette-rotate-bitmap.bmp`, testcopy /*insert changed bitmap here*/, exports.writeNew);
+    });
+  }
   fileHelper.initFile(`${__dirname}/assets/palette-bitmap.bmp`, onRead);
 };
 
